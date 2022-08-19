@@ -1,0 +1,52 @@
+service: htmlToPdf
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  timeout: 30
+  lambdaHashingVersion: 20201221
+    # Processor architecture: 'x86_64' or 'arm64' via Graviton2 (default: x86_64)
+  architecture: x86_64
+  deploymentBucket:
+    name: itdose-htmltopdf1
+    
+    # environment:
+    #   S3_BUCKET: itdose-htmltopdf1
+    # lambdaHashingVersion:20201221
+    # AWS_ACCESS_KEY_ID: AKIAY2RETRDFF673HKPG
+    # AWS_SECRET_ACCESS_KEY: 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
+    # AWS_REGION: ap-south-1 
+
+functions:
+  htmlToPdf:
+    handler: handler.htmlToPdf
+ #   layers:
+ #    - ${cf:executables-layer-${self:provider.stage}.HtmlToPdfLayerExport}
+    events:
+      - http:
+          path: api/htmltopdf
+          method: post
+          cors: true
+          integration: lambda
+
+ 
+
+
+# serverless optimization
+package:
+  individually: true
+
+# serverless-webpack configuration
+# Enable auto-packing of external modules
+custom:
+  webpack:
+    webpackConfig: ../webpack.config.js
+    includeModules:
+      forceExclude:
+        - aws-sdk
+      packagePath: ../package.json
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
