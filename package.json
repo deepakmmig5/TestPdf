@@ -25,7 +25,7 @@
     "babel-plugin-source-map-support": "^2.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "regenerator-runtime": "^0.13.3",
-    "serverless": "^2.70.0",
+    "serverless": "^3.22.0",
     "serverless-offline": "^8.8.1",
     "serverless-webpack": "^5.6.1",
     "webpack": "^4.41.6",

@@ -3,6 +3,7 @@ service: executables-layer
 provider:
   name: aws
   stage: ${opt:stage, 'dev'}
+  region: ap-south-1
   lambdaHashingVersion: 20201221
     # Processor architecture: 'x86_64' or 'arm64' via Graviton2 (default: x86_64)
   architecture: x86_64

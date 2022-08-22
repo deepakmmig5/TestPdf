@@ -5,6 +5,7 @@ provider:
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
   timeout: 30
+  region: ap-south-1
   lambdaHashingVersion: 20201221
     # Processor architecture: 'x86_64' or 'arm64' via Graviton2 (default: x86_64)
   architecture: x86_64
@@ -21,8 +22,8 @@ provider:
 functions:
   htmlToPdf:
     handler: handler.htmlToPdf
- #   layers:
- #    - ${cf:executables-layer-${self:provider.stage}.HtmlToPdfLayerExport}
+    # layers:
+    #  - ${cf:executables-layer-${self:provider.stage}.HtmlToPdfLayerExport}
     events:
       - http:
           path: api/htmltopdf
